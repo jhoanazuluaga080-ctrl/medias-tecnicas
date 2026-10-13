@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medias Técnicas Interactivas - Liceo Antioqueño</title>
+
+<!-- Fuente moderna y didáctica de Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+/* --- IMPORTACIÓN DE FUENTES --- */
+/* Fredoka para títulos (redondeada) y Quicksand para texto */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Quicksand:wght@500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    /* --- FONDO OSCURO DE NEÓN (IGUAL A LA IMAGEN) --- */
+    background: #0f0c1b; /* Color base oscuro */
+    background-image: 
+        /* Degradados suaves de colores neón en las esquinas */
+        radial-gradient(circle at 10% 20%, rgba(0, 229, 255, 0.2) 0%, transparent 40%), /* Cyan */
+        radial-gradient(circle at 90% 15%, rgba(255, 0, 128, 0.2) 0%, transparent 35%), /* Magenta */
+        radial-gradient(circle at 50% 80%, rgba(124, 77, 255, 0.2) 0%, transparent 45%), /* Morado */
+        radial-gradient(circle at 15% 85%, rgba(0, 230, 118, 0.15) 0%, transparent 40%); /* Verde */
+    background-attachment: fixed;
+    color: #ffffff; /* Texto en blanco para contraste */
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- ELEMENTOS DECORATIVOS FLOTANTES --- */
+/* Esto crea los circuitos y notas que flotan de fondo */
+.bg-decorations {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.floating-icon {
+    position: absolute;
+    font-size: 2.5rem;
+    opacity: 0.3; /* Semitransparentes */
+    animation: floatGlow 10s infinite ease-in-out;
+}
+
+/* Posicionamiento y color de cada icono flotante */
+.icon1 { top: 10%; left: 4%; animation-duration: 9s; filter: drop-shadow(0 0 10px #00f0ff); } /* Cyan */
+.icon2 { top: 25%; right: 5%; animation-duration: 13s; filter: drop-shadow(0 0 10px #ff007f); } /* Magenta */
+.icon3 { top: 52%; left: 3%; animation-duration: 11s; filter: drop-shadow(0 0 10px #ffe600); } /* Amarillo */
+.icon4 { top: 75%; right: 4%; animation-duration: 12s; filter: drop-shadow(0 0 10px #00ff66); } /* Verde */
+.icon5 { top: 90%; left: 5%; animation-duration: 8s; filter: drop-shadow(0 0 10px #9d00ff); } /* Morado */
+
+@keyframes floatGlow {
+    0% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+    50% { transform: translateY(-20px) rotate(10deg); opacity: 0.5; }
+    100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+}
+
+/* --- TÍTULOS --- */
+h1, h2, h3 {
+    font-family: 'Fredoka', sans-serif;
+    letter-spacing: 1px;
+}
+
+/* --- ENCABEZADO (HEADER) --- */
+header {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, rgba(255, 0, 128, 0.9), rgba(124, 77, 255, 0.9), rgba(0, 229, 255, 0.9));
+    background-size: 200% 200%;
+    animation: rainbowHeader 8s ease infinite;
+    padding: 60px 20px 50px;
+    text-align: center;
+    color: #fff;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.4), 0 0 15px rgba(255, 0, 128, 0.4);
+    border-bottom: 3px solid #00f0ff;
+}
+
+@keyframes rainbowHeader {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+header h1 {
+    font-size: 3.2rem;
+    margin: 0;
+    text-shadow: 0 0 15px #ffffff, 0 0 25px #ff007f;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 1.25rem;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+/* --- BARRA DE NAVEGACIÓN --- */
+nav {
+    position: sticky;
+    top: 15px;
+    z-index: 1000;
+    background: rgba(20, 16, 38, 0.85); /* Fondo oscuro semitransparente */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+    padding: 12px 20px;
+    text-align: center;
+    max-width: 650px;
+    margin: -25px auto 35px;
+    border-radius: 35px;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    border: 2px solid #00f0ff; /* Borde cyan neón */
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 8px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 25px;
+}
+
+/* Efecto hover colorido para cada enlace */
+nav a:nth-child(1):hover { background: #ff007f; box-shadow: 0 0 15px #ff007f; color: #fff; } /* Inicio: Rosa */
+nav a:nth-child(2):hover { background: #00bcd4; box-shadow: 0 0 15px #00bcd4; color: #fff; } /* Medias: Cyan */
+nav a:nth-child(3):hover { background: #ffd600; box-shadow: 0 0 15px #ffd600; color: #000; } /* Test: Amarillo */
+
+/* --- SECCIONES PRINCIPALES --- */
+section {
+    position: relative;
+    z-index: 1;
+    padding: 20px 8% 40px;
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+h2 {
+    color: #00f0ff; /* Título cyan neón */
+    font-size: 2.3rem;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 0 0 12px #00f0ff;
+}
+
+/* --- TARJETAS (CARDS) --- */
+.card {
+    background: rgba(25, 20, 48, 0.8); /* Fondo oscuro de la tarjeta */
+    backdrop-filter: blur(8px);
+    border-radius: 25px;
+    padding: 28px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Sombra intensa */
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.08); /* Borde casi invisible */
+}
+
+/* Efecto al pasar el mouse por encima */
+.card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
+}
+
+/* Decoración lateral colorida para cada tarjeta */
+.card::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    opacity: 0.6;
+    filter: blur(10px);
+}
+
+/* Colores específicos para cada sección */
+#medias .card:nth-child(1) { border-color: #00f0ff; } /* Sistemas: Cyan */
+#medias .card:nth-child(1)::after { background: #00f0ff; }
+
+#medias .card:nth-child(2) { border-color: #ff007f; } /* Música: Rosa */
+#medias .card:nth-child(2)::after { background: #ff007f; }
+
+#medias .card:nth-child(3) { border-color: #ff9900; } /* Administrativa: Naranja */
+#medias .card:nth-child(3)::after { background: #ff9900; }
+
+#medias .card:nth-child(4) { border-color: #00ff66; } /* Contabilidad: Verde */
+#medias .card:nth-child(4)::after { background: #00ff66; }
+
+.card h3 {
+    margin-top: 0;
+    color: #ffffff;
+    font-size: 1.6rem;
+    text-shadow: 0 0 8px rgba(255,255,255,0.7);
+}
+
+.card p b {
+    color: #00f0ff; /* Subtítulos en cyan */
+}
+
+/* --- BOTONES (BUTTONS) --- */
+button {
+    background: linear-gradient(135deg, #ff007f, #7c4dff, #00f0ff);
+    background-size: 200% 200%;
+    color: #fff;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(255, 0, 128, 0.5);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-position: 100% 0%; /* Efecto de brillo multicolor */
+    transform: scale(1.06);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.7);
+}
+
+/* --- REPRODUCTOR DE VIDEO --- */
+video {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 20px;
+    margin-top: 15px;
+    border: 3px solid #00f0ff; /* Borde neón neón */
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+    background: #000;
+}
+
+/* --- BARRA DE PROGRESO DE RESULTADOS --- */
+progress {
+    width: 100%;
+    height: 25px;
+    border-radius: 15px;
+    overflow: hidden;
+    appearance: none;
+    margin-top: 6px;
+}
+
+progress::-webkit-progress-bar {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+}
+
+/* Colores de neón para cada barra de progreso */
+#barSis::-webkit-progress-value { background: linear-gradient(90deg, #00f0ff, #0077ff); box-shadow: 0 0 10px #00f0ff; }
+#barMus::-webkit-progress-value { background: linear-gradient(90deg, #ff007f, #ff00e5); box-shadow: 0 0 10px #ff007f; }
+#barAdm::-webkit-progress-value { background: linear-gradient(90deg, #ff9900, #ffcc00); box-shadow: 0 0 10px #ff9900; }
+#barCon::-webkit-progress-value { background: linear-gradient(90deg, #00ff66, #00cc44); box-shadow: 0 0 10px #00ff66; }
+
+/* --- PIE DE PÁGINA (FOOTER) --- */
+footer {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, rgba(255, 0, 128, 0.9), rgba(124, 77, 255, 0.9), rgba(0, 229, 255, 0.9));
+    color: #fff;
+    text-align: center;
+    padding: 30px;
+    font-family: 'Fredoka', sans-serif;
+    margin-top: 50px;
+    border-top: 3px solid #00f0ff;
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.4);
+}
+</style>
+<script>
+function mostrar(id){
+    const e = document.getElementById(id);
+    e.style.display = e.style.display === "block" ? "none" : "block";
+}
+
+function calcularResultado(){
+    let puntos = {
+        sistemas: 0,
+        musica: 0,
+        administrativa: 0,
+        contabilidad: 0
+    };
+
+    const respuestas = document.querySelectorAll("#testForm input[type='radio']:checked");
+    const totalPreguntas = 28;
+
+    if(respuestas.length !== totalPreguntas){
+        alert("⚠️ Por favor responde las 28 preguntas antes de calcular tu resultado.");
+        return;
+    }
+
+    respuestas.forEach(r => {
+        const partes = r.value.split("-");
+        const valor = parseInt(partes[0].trim());
+        const area = partes[1].trim();
+        if(puntos[area] !== undefined){
+            puntos[area] += valor;
+        }
+    });
+
+    let pSis = Math.round((puntos.sistemas / 27) * 100);
+    let pMus = Math.round((puntos.musica / 21) * 100);
+    let pAdm = Math.round((puntos.administrativa / 18) * 100);
+    let pCon = Math.round((puntos.contabilidad / 18) * 100);
+
+    pSis = Math.min(pSis, 100);
+    pMus = Math.min(pMus, 100);
+    pAdm = Math.min(pAdm, 100);
+    pCon = Math.min(pCon, 100);
+
+    document.getElementById("resultado").style.display = "block";
+
+    document.getElementById("barSis").value = pSis;
+    document.getElementById("barMus").value = pMus;
+    document.getElementById("barAdm").value = pAdm;
+    document.getElementById("barCon").value = pCon;
+
+    document.getElementById("psis").innerHTML = pSis + "%";
+    document.getElementById("pmus").innerHTML = pMus + "%";
+    document.getElementById("padm").innerHTML = pAdm + "%";
+    document.getElementById("pcon").innerHTML = pCon + "%";
+
+    let mayor = Math.max(pSis, pMus, pAdm, pCon);
+
+    let recomendacionTexto = "";
+    if(mayor === pSis){
+        recomendacionTexto = "💻 La Media Técnica que mejor se adapta a ti es <b>Sistemas</b>.";
+    }else if(mayor === pMus){
+        recomendacionTexto = "🎵 La Media Técnica que mejor se adapta a ti es <b>Música</b>.";
+    }else if(mayor === pAdm){
+        recomendacionTexto = "📂 La Media Técnica que mejor se adapta a ti es <b>Asistencia Administrativa</b>.";
+    }else{
+        recomendacionTexto = "📊 La Media Técnica que mejor se adapta a ti es <b>Contabilidad</b>.";
+    }
+
+    document.getElementById("recomendacion").innerHTML = recomendacionTexto;
+    document.getElementById("resultado").scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+</head>
+<body>
+<div class="bg-decorations">
+    <div class="floating-icon icon1">💻</div>
+    <div class="floating-icon icon2">🎵</div>
+    <div class="floating-icon icon3">📂</div>
+    <div class="floating-icon icon4">📊</div>
+    <div class="floating-icon icon5">🎓</div>
+</div>
+<header>
+  <h1>🎓 Media Tech</h1>
+  <p><b>Liceo Antioqueño</b></p>
+  <p>Creado por: <b>Paulina Waque y Michell Zuluaga</b></p>
+</header>
+
+<nav>
+  <a href="#inicio">🏠 Inicio</a>
+  <a href="#medias">📚 Medias Técnicas</a>
+  <a href="#test">📝 Test Vocacional</a>
+</nav>
+
+<section id="inicio">
+  <h2>¡Bienvenid@s! ✨</h2>
+  <div class="card" style="text-align: center;">
+    <p>Te damos la bienvenida a nuestra página web interactiva sobre las <b>Medias Técnicas del Liceo Antioqueño</b>. Aquí encontrarás información detallada, videos explicativos y un test vocacional especialmente diseñado para descubrir cuál media técnica se adapta a tus gustos y talentos.</p>
+  </div>
+</section>
+
+<section id="medias">
+  <h2>📚 Medias Técnicas</h2>
+
+  <!-- 1. SISTEMAS -->
+  <div class="card">
+    <h3>💻 Sistemas</h3>
+    <p>Programación, páginas web y tecnología.</p>
+    <button onclick="mostrar('sis')">Ver más información 🔍</button>
+    <div class="info" id="sis">
+      <h4>Descripción</h4>
+      <p>Aprende programación, mantenimiento de redes y desarrollo web.</p>
+      <h4>Perfil</h4><p>Creativo, responsable y con interés por la tecnología.</p>
+      <h4>Competencias</h4><ul><li>Programar algoritmos</li><li>Diseñar páginas web</li></ul>
+      <h4>Docentes</h4><p>Ronald Paz, Elkin Mosquera y acompañamiento del SENA</p>
+    </div>
+    <h4>Video Presentación</h4>
+    <video controls>
+  <source src="videos/sistemas.mp4" type="video/mp4">
+</video>
+  </div>
+
+  <!-- 2. MÚSICA -->
+  <div class="card">
+    <h3>🎵 Música</h3>
+    <p>Instrumentos, ritmos e interpretación musical.</p>
+    <button onclick="mostrar('mus')">Ver más información 🔍</button>
+    <div class="info" id="mus">
+      <h4>Descripción</h4>
+      <p>Desarrolla tus habilidades artísticas y fortalece tus conocimientos musicales.</p>
+      <h4>Perfil</h4><p>Creativo, con gran imaginación e interés por los ritmos y la música.</p>
+      <h4>Competencias</h4><ul><li>Trabajo en equipo</li><li>Teoría musical</li><li>Interpretación musical</li></ul> 
+      <h4>Docentes</h4><p>Simón Foronda, César Uribe y acompañamiento del SENA</p>
+    </div>
+    <h4>Video Presentación</h4>
+    <video controls>
+  <source src="videos/musica.mp4" type="video/mp4">
+</video>
+  </div>
+
+  <!-- 3. ASISTENCIA ADMINISTRATIVA -->
+  <div class="card">
+    <h3>📂 Asistencia Administrativa</h3>
+    <p>Excel, organización de documentos y atención al cliente.</p>
+    <button onclick="mostrar('adm')">Ver más información 🔍</button>
+    <div class="info" id="adm">
+      <h4>Descripción</h4>
+      <p>Fortalece tus competencias para apoyar procesos administrativos y empresariales.</p>
+      <h4>Perfil</h4><p>Leal, responsable, respetuoso y organizado.</p>
+      <h4>Competencias</h4><ul><li>Responsabilidad</li><li>Gestión empresarial</li><li>Comunicación organizacional</li></ul> 
+      <h4>Docentes</h4><p>Diana Monsalve, Liliana Alarcón y acompañamiento del SENA</p>
+    </div>
+    <h4>Video Presentación</h4>
+    <video controls>
+  <source src="videos/administrativa.mp4" type="video/mp4">
+</video>
+  </div>
+
+  <!-- 4. CONTABILIDAD -->
+  <div class="card">
+    <h3>📊 Contabilidad</h3>
+    <p>Números, administración, presupuestos y costos.</p>
+    <button onclick="mostrar('con')">Ver más información 🔍</button>
+    <div class="info" id="con">
+      <h4>Descripción</h4>
+      <p>Si te gusta la organización, los números y la administración empresarial, esta media es para ti.</p>
+      <h4>Perfil</h4><p>Analítico, sincero y hábil para el manejo de documentos contables.</p>
+      <h4>Competencias</h4><ul><li>Contabilidad básica</li><li>Costos y presupuestos</li><li>Administración empresarial</li></ul> 
+      <h4>Docentes</h4><p>Diana Monsalve, Liliana Alarcón y acompañamiento del SENA</p>
+    </div>
+    <h4>Video Presentación</h4>
+    <video controls>
+  <source src="videos/contabilidad.mp4" type="video/mp4">
+</video>
+  </div>
+</section>
+
+<section id="test">
+  <h2>📝 Test Vocacional Interactivo</h2>
+  <p style="text-align: center; margin-bottom: 25px;">Responde con sinceridad las 28 preguntas para descubrir qué Media Técnica encaja mejor contigo.</p>
+
+  <form id="testForm">
+
+    <div class="card">
+      <p><b>1. ¿Te gusta usar los computadores, tablets o tecnología para hacer tus tareas?</b></p>
+      <label><input type="radio" name="p1" value="3-sistemas"> Sí</label><br>
+      <label><input type="radio" name="p1" value="2-sistemas"> A veces</label><br>
+      <label><input type="radio" name="p1" value="1-sistemas"> Poco</label><br>
+      <label><input type="radio" name="p1" value="0-sistemas"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>2. ¿Sientes interés y curiosidad para aprender cómo funcionan las páginas web, aplicaciones y programación?</b></p>
+      <label><input type="radio" name="p2" value="3-sistemas"> Sí</label><br>
+      <label><input type="radio" name="p2" value="2-sistemas"> A veces</label><br>
+      <label><input type="radio" name="p2" value="1-sistemas"> Poco</label><br>
+      <label><input type="radio" name="p2" value="0-sistemas"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>3. ¿Te gusta y disfrutas la música?</b></p>
+      <label><input type="radio" name="p3" value="3-musica"> Sí</label><br>
+      <label><input type="radio" name="p3" value="2-musica"> A veces</label><br>
+      <label><input type="radio" name="p3" value="1-musica"> Poco</label><br>
+      <label><input type="radio" name="p3" value="0-musica"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>4. ¿Te gustaría aprender a tocar un instrumento musical?</b></p>
+      <label><input type="radio" name="p4" value="3-musica"> Sí</label><br>
+      <label><input type="radio" name="p4" value="2-musica"> A veces</label><br>
+      <label><input type="radio" name="p4" value="1-musica"> Poco</label><br>
+      <label><input type="radio" name="p4" value="0-musica"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>5. ¿Tienes habilidades para trabajar las matemáticas y los números?</b></p>
+      <label><input type="radio" name="p5" value="3-contabilidad"> Sí</label><br>
+      <label><input type="radio" name="p5" value="2-contabilidad"> A veces</label><br>
+      <label><input type="radio" name="p5" value="1-contabilidad"> Poco</label><br>
+      <label><input type="radio" name="p5" value="0-contabilidad"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>6. ¿Te gusta trabajar con cálculos, cuentas y presupuesto?</b></p>
+      <label><input type="radio" name="p6" value="3-contabilidad"> Sí</label><br>
+      <label><input type="radio" name="p6" value="2-contabilidad"> A veces</label><br>
+      <label><input type="radio" name="p6" value="1-contabilidad"> Poco</label><br>
+      <label><input type="radio" name="p6" value="0-contabilidad"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>7. ¿Te consideras organizado?</b></p>
+      <label><input type="radio" name="p7" value="3-administrativa"> Sí</label><br>
+      <label><input type="radio" name="p7" value="2-administrativa"> A veces</label><br>
+      <label><input type="radio" name="p7" value="1-administrativa"> Poco</label><br>
+      <label><input type="radio" name="p7" value="0-administrativa"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>8. ¿Te gusta ayudar a otras personas?</b></p>
+      <label><input type="radio" name="p8" value="3-administrativa"> Sí</label><br>
+      <label><input type="radio" name="p8" value="2-administrativa"> A veces</label><br>
+      <label><input type="radio" name="p8" value="1-administrativa"> Poco</label><br>
+      <label><input type="radio" name="p8" value="0-administrativa"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>9. ¿Te interesa aprender el desarrollo de la tecnología?</b></p>
+      <label><input type="radio" name="p9" value="3-sistemas"> Sí</label><br>
+      <label><input type="radio" name="p9" value="2-sistemas"> A veces</label><br>
+      <label><input type="radio" name="p9" value="1-sistemas"> Poco</label><br>
+      <label><input type="radio" name="p9" value="0-sistemas"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>10. ¿Te gusta aprender cosas nuevas?</b></p>
+      <label><input type="radio" name="p10" value="3-administrativa"> Sí</label><br>
+      <label><input type="radio" name="p10" value="2-administrativa"> A veces</label><br>
+      <label><input type="radio" name="p10" value="1-administrativa"> Poco</label><br>
+      <label><input type="radio" name="p10" value="0-administrativa"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>11. ¿Te gusta resolver problemas?</b></p>
+      <label><input type="radio" name="p11" value="3-contabilidad"> Sí</label><br>
+      <label><input type="radio" name="p11" value="2-contabilidad"> A veces</label><br>
+      <label><input type="radio" name="p11" value="1-contabilidad"> Poco</label><br>
+      <label><input type="radio" name="p11" value="0-contabilidad"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>12. ¿Has sentido interés o curiosidad por aprender cómo se crea, compone o produce una canción?</b></p>
+      <label><input type="radio" name="p12" value="3-musica"> Sí</label><br>
+      <label><input type="radio" name="p12" value="2-musica"> A veces</label><br>
+      <label><input type="radio" name="p12" value="1-musica"> Poco</label><br>
+      <label><input type="radio" name="p12" value="0-musica"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>13. ¿Te gustaría trabajar en una oficina?</b></p>
+      <label><input type="radio" name="p13" value="3-administrativa"> Sí</label><br>
+      <label><input type="radio" name="p13" value="2-administrativa"> A veces</label><br>
+      <label><input type="radio" name="p13" value="1-administrativa"> Poco</label><br>
+      <label><input type="radio" name="p13" value="0-administrativa"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>14. ¿Te gusta administrar recursos?</b></p>
+      <label><input type="radio" name="p14" value="3-contabilidad"> Sí</label><br>
+      <label><input type="radio" name="p14" value="2-contabilidad"> A veces</label><br>
+      <label><input type="radio" name="p14" value="1-contabilidad"> Poco</label><br>
+      <label><input type="radio" name="p14" value="0-contabilidad"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>15. ¿Te gusta trabajar en equipo?</b></p>
+      <label><input type="radio" name="p15" value="3-administrativa"> Sí</label><br>
+      <label><input type="radio" name="p15" value="2-administrativa"> A veces</label><br>
+      <label><input type="radio" name="p15" value="1-administrativa"> Poco</label><br>
+      <label><input type="radio" name="p15" value="0-administrativa"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>16. ¿Te interesan diferentes géneros musicales?</b></p>
+      <label><input type="radio" name="p16" value="3-musica"> Sí</label><br>
+      <label><input type="radio" name="p16" value="2-musica"> A veces</label><br>
+      <label><input type="radio" name="p16" value="1-musica"> Poco</label><br>
+      <label><input type="radio" name="p16" value="0-musica"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>17. ¿Te gusta usar programas de computador?</b></p>
+      <label><input type="radio" name="p17" value="3-sistemas"> Sí</label><br>
+      <label><input type="radio" name="p17" value="2-sistemas"> A veces</label><br>
+      <label><input type="radio" name="p17" value="1-sistemas"> Poco</label><br>
+      <label><input type="radio" name="p17" value="0-sistemas"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>18. ¿Te interesa el mundo empresarial?</b></p>
+      <label><input type="radio" name="p18" value="3-contabilidad"> Sí</label><br>
+      <label><input type="radio" name="p18" value="2-contabilidad"> A veces</label><br>
+      <label><input type="radio" name="p18" value="1-contabilidad"> Poco</label><br>
+      <label><input type="radio" name="p18" value="0-contabilidad"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>19. ¿Te gusta expresar tus emociones mediante el arte?</b></p>
+      <label><input type="radio" name="p19" value="3-musica"> Sí</label><br>
+      <label><input type="radio" name="p19" value="2-musica"> A veces</label><br>
+      <label><input type="radio" name="p19" value="1-musica"> Poco</label><br>
+      <label><input type="radio" name="p19" value="0-musica"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>20. ¿Te gustaría crear aplicaciones o videojuegos?</b></p>
+      <label><input type="radio" name="p20" value="3-sistemas"> Sí</label><br>
+      <label><input type="radio" name="p20" value="2-sistemas"> A veces</label><br>
+      <label><input type="radio" name="p20" value="1-sistemas"> Poco</label><br>
+      <label><input type="radio" name="p20" value="0-sistemas"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>21. ¿Te gusta llevar cuentas o presupuestos?</b></p>
+      <label><input type="radio" name="p21" value="3-contabilidad"> Sí</label><br>
+      <label><input type="radio" name="p21" value="2-contabilidad"> A veces</label><br>
+      <label><input type="radio" name="p21" value="1-contabilidad"> Poco</label><br>
+      <label><input type="radio" name="p21" value="0-contabilidad"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>22. ¿Te gustaría participar en grupos musicales y hacer presentaciones?</b></p>
+      <label><input type="radio" name="p22" value="3-musica"> Sí</label><br>
+      <label><input type="radio" name="p22" value="2-musica"> A veces</label><br>
+      <label><input type="radio" name="p22" value="1-musica"> Poco</label><br>
+      <label><input type="radio" name="p22" value="0-musica"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>23. ¿Te gusta organizar actividades o eventos?</b></p>
+      <label><input type="radio" name="p23" value="3-administrativa"> Sí</label><br>
+      <label><input type="radio" name="p23" value="2-administrativa"> A veces</label><br>
+      <label><input type="radio" name="p23" value="1-administrativa"> Poco</label><br>
+      <label><input type="radio" name="p23" value="0-administrativa"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>24. ¿Te interesa aprender nuevas tecnologías?</b></p>
+      <label><input type="radio" name="p24" value="3-sistemas"> Sí</label><br>
+      <label><input type="radio" name="p24" value="2-sistemas"> A veces</label><br>
+      <label><input type="radio" name="p24" value="1-sistemas"> Poco</label><br>
+      <label><input type="radio" name="p24" value="0-sistemas"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>25. ¿Te imaginas en una empresa administrando su economía y recursos?</b></p>
+      <label><input type="radio" name="p25" value="3-contabilidad"> Sí</label><br>
+      <label><input type="radio" name="p25" value="2-contabilidad"> A veces</label><br>
+      <label><input type="radio" name="p25" value="1-contabilidad"> Poco</label><br>
+      <label><input type="radio" name="p25" value="0-contabilidad"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>26. ¿Piensas que la música es una actividad importante en tu proyecto de vida?</b></p>
+      <label><input type="radio" name="p26" value="3-musica"> Sí</label><br>
+      <label><input type="radio" name="p26" value="2-musica"> A veces</label><br>
+      <label><input type="radio" name="p26" value="1-musica"> Poco</label><br>
+      <label><input type="radio" name="p26" value="0-musica"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>27. ¿Te sientes motivado para trabajar en una empresa con funciones de apoyo administrativo?</b></p>
+      <label><input type="radio" name="p27" value="3-administrativa"> Sí</label><br>
+      <label><input type="radio" name="p27" value="2-administrativa"> A veces</label><br>
+      <label><input type="radio" name="p27" value="1-administrativa"> Poco</label><br>
+      <label><input type="radio" name="p27" value="0-administrativa"> No</label>
+    </div>
+
+    <div class="card">
+      <p><b>28. ¿Crees que formarte en sistemas ayudaría a tu proyecto profesional?</b></p>
+      <label><input type="radio" name="p28" value="3-sistemas"> Sí</label><br>
+      <label><input type="radio" name="p28" value="2-sistemas"> A veces</label><br>
+      <label><input type="radio" name="p28" value="1-sistemas"> Poco</label><br>
+      <label><input type="radio" name="p28" value="0-sistemas"> No</label>
+    </div>
+
+    <!-- Botón interactivo -->
+    <div style="text-align:center; margin: 35px 0;">
+      <button type="button" onclick="calcularResultado()" style="font-size: 1.2rem; padding: 15px 35px;">✨ Ver mi Media Técnica Ideal 🎯</button>
+    </div>
+
+  </form>
+
+  <div class="card" id="resultado" style="display:none; margin-top:20px;">
+    <h2>📊 Tu Resultado Vocacional</h2>
+
+    <p><b>💻 Sistemas:</b>
+      <progress id="barSis" value="0" max="100"></progress>
+      <span id="psis">0%</span>
+    </p>
+
+    <p><b>🎵 Música:</b>
+      <progress id="barMus" value="0" max="100"></progress>
+      <span id="pmus">0%</span>
+    </p>
+
+    <p><b>📂 Asistencia Administrativa:</b>
+      <progress id="barAdm" value="0" max="100"></progress>
+      <span id="padm">0%</span>
+    </p>
+
+    <p><b>📊 Contabilidad:</b>
+      <progress id="barCon" value="0" max="100"></progress>
+      <span id="pcon">0%</span>
+    </p>
+
+    <hr style="border: 1px dashed #ab47bc; margin: 20px 0;">
+
+    <h3 id="recomendacion"></h3>
+  </div>
+
+  <div class="card" style="background:#fff8e6; border-left:6px solid #ff9800;">
+    <h3 style="color:#e65100; margin-top:0;">📌 Nota importante</h3>
+    <p style="text-align:justify;">
+      Este cuestionario te muestra una aproximación de intereses que te ayudará a elegir la Media Técnica que más te gusta; sin embargo, recuerda participar en otros espacios de orientación de la Institución Educativa, como el carrusel de oferta en grado noveno, pedir asesoría en Orientación Escolar, entre otros.
+    </p>
+    <p style="text-align:center;"><b>¡Muchas gracias!</b></p>
+  </div>
+
+</section>
+
+<footer>
+  <p>🎓 Liceo Antioqueño - Medias Técnicas</p>
+</footer>
+
+</body>
+</html>
